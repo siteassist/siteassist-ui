@@ -2,8 +2,8 @@ import type {
   CreateMessage,
   Message as ChatMessage,
   UseChatHelpers,
-} from "@ai-sdk/react";
-import type { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
+} from '@ai-sdk/react';
+import type {Dispatch, FormEvent, ReactNode, SetStateAction} from 'react';
 import {
   createContext,
   useCallback,
@@ -11,14 +11,14 @@ import {
   useEffect,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 
-import { useSiteAssistChat } from "@/hooks";
+import {useSiteAssistChat} from '@/hooks';
 
-import { useSiteAssist } from "./siteassist-provider";
+import {useSiteAssist} from './siteassist-provider';
 
 export interface ChatBoxContextValue
-  extends Omit<UseChatHelpers, "handleSubmit"> {
+  extends Omit<UseChatHelpers, 'handleSubmit'> {
   threadId: string | null;
   setThreadId: Dispatch<SetStateAction<string | null>>;
   isMessagesLoading: boolean;
@@ -29,13 +29,13 @@ export interface ChatBoxContextValue
 
 export const ChatBoxContext = createContext<ChatBoxContextValue | null>(null);
 
-export default function ChatBoxProvider({ children }: { children: ReactNode }) {
+export default function ChatBoxProvider({children}: {children: ReactNode}) {
   const [threadId, setThreadId] = useState<string | null>(null);
   const [loadThreadCalled, setLoadThreadCalled] = useState(false);
   const [isMessagesLoading, setIsMessagesLoading] = useState(false);
   const [isSendingMessage, setIsSendingMessage] = useState(false);
   const [tempMessage, setTempMessage] = useState<CreateMessage | null>(null);
-  const { client, isProjectLoaded } = useSiteAssist();
+  const {client, isProjectLoaded} = useSiteAssist();
 
   const {
     messages,
@@ -46,7 +46,7 @@ export default function ChatBoxProvider({ children }: { children: ReactNode }) {
     setInput,
     ...restChatResult
   } = useSiteAssistChat({
-    threadId: threadId ?? "",
+    threadId: threadId ?? '',
   });
 
   const submitionDissabled = useMemo(
@@ -54,8 +54,8 @@ export default function ChatBoxProvider({ children }: { children: ReactNode }) {
       !isProjectLoaded ||
       isSendingMessage ||
       isMessagesLoading ||
-      status === "streaming" ||
-      status === "submitted",
+      status === 'streaming' ||
+      status === 'submitted',
     [isProjectLoaded, isSendingMessage, isMessagesLoading, status],
   );
 
@@ -72,10 +72,10 @@ export default function ChatBoxProvider({ children }: { children: ReactNode }) {
       }
 
       const message: CreateMessage = {
-        role: "user",
+        role: 'user',
         content: input,
       };
-      setInput("");
+      setInput('');
 
       if (!threadId) {
         setIsSendingMessage(true);
@@ -117,7 +117,7 @@ export default function ChatBoxProvider({ children }: { children: ReactNode }) {
               role: message.role,
               createdAt: message.createdAt,
               annotations: (message.annotations ??
-                []) as ChatMessage["annotations"],
+                []) as ChatMessage['annotations'],
             };
           }),
         );
@@ -177,7 +177,7 @@ export default function ChatBoxProvider({ children }: { children: ReactNode }) {
 export const useChatBox = () => {
   const context = useContext(ChatBoxContext);
   if (!context) {
-    throw new Error("useChatBox must use inside a ChatBoxProvider");
+    throw new Error('useChatBox must use inside a ChatBoxProvider');
   }
   return context;
 };

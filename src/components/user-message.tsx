@@ -1,10 +1,10 @@
-import type { Message } from "@ai-sdk/react";
-import { UserIcon } from "lucide-react";
+import type {Message} from '@ai-sdk/react';
+import {UserIcon} from 'lucide-react';
 
-import Avatar from "./avatar";
-import Markdown from "./markdown";
+import Avatar from './avatar';
+import Markdown from './markdown';
 
-export default function UserMessage({ message }: { message: Message }) {
+export default function UserMessage({message}: {message: Message}) {
   return (
     <div className="flex flex-row-reverse gap-6">
       <Avatar fallbackIcon={<UserIcon />} />

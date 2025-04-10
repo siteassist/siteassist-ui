@@ -1,11 +1,11 @@
-import * as DialogPrimitives from "@radix-ui/react-dialog";
-import { SiteAssistClient } from "siteassist-core";
-import { useCallback, useEffect, useState } from "react";
+import * as DialogPrimitives from '@radix-ui/react-dialog';
+import {useCallback, useEffect, useState} from 'react';
+import {SiteAssistClient} from 'siteassist-core';
 
-import ChatBox from "@/components/chatbox";
-import ChatBoxProvider from "@/providers/chatbox-provider";
-import { SiteAssistProvider } from "@/providers/siteassist-provider";
-import TailwindCSS from "@/tailwindcss";
+import ChatBox from '@/components/chatbox';
+import ChatBoxProvider from '@/providers/chatbox-provider';
+import {SiteAssistProvider} from '@/providers/siteassist-provider';
+import TailwindCSS from '@/tailwindcss';
 
 export interface ChatBoxWidgetProps {
   apiKey?: string;
@@ -22,11 +22,11 @@ export default function ChatBoxWidget({
 }: ChatBoxWidgetProps) {
   const [open, setOpen] = useState(false);
   if (!apiKey) {
-    throw new Error("api-key is required");
+    throw new Error('api-key is required');
   }
 
   const [client] = useState(
-    () => new SiteAssistClient({ apiKey, apiUri, assistantId })
+    () => new SiteAssistClient({apiKey, apiUri, assistantId}),
   );
 
   const handleOpenChatbox = useCallback(() => {
@@ -34,9 +34,9 @@ export default function ChatBoxWidget({
   }, []);
 
   useEffect(() => {
-    document.addEventListener("open-sa-chatbox", handleOpenChatbox);
+    document.addEventListener('open-sa-chatbox', handleOpenChatbox);
     return () => {
-      document.removeEventListener("open-sa-chatbox", handleOpenChatbox);
+      document.removeEventListener('open-sa-chatbox', handleOpenChatbox);
     };
   }, [handleOpenChatbox]);
 

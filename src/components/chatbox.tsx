@@ -1,14 +1,14 @@
-import { ArrowDownIcon, BotIcon, Loader2Icon, SendIcon } from "lucide-react";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import {ArrowDownIcon, BotIcon, Loader2Icon, SendIcon} from 'lucide-react';
+import {Fragment, useCallback, useEffect, useRef, useState} from 'react';
 
-import { useChatBox } from "@/providers/chatbox-provider";
-import { useSiteAssist } from "@/providers/siteassist-provider";
-import { cn } from "@/utils";
+import {useChatBox} from '@/providers/chatbox-provider';
+import {useSiteAssist} from '@/providers/siteassist-provider';
+import {cn} from '@/utils';
 
-import AssistantMessage from "./assistant-message";
-import Avatar from "./avatar";
-import MessageInput from "./message-input";
-import UserMessage from "./user-message";
+import AssistantMessage from './assistant-message';
+import Avatar from './avatar';
+import MessageInput from './message-input';
+import UserMessage from './user-message';
 
 export default function ChatBox() {
   return (
@@ -20,8 +20,8 @@ export default function ChatBox() {
 }
 
 function MessagesList() {
-  const { assistant } = useSiteAssist();
-  const { messages, tempMessage, status } = useChatBox();
+  const {assistant} = useSiteAssist();
+  const {messages, tempMessage, status} = useChatBox();
   const [showScrollDownButtom, setShowScrollDownButtom] = useState(false);
   const scrollViewRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,7 @@ function MessagesList() {
     scrollViewRef.current?.scrollTo({
       top:
         scrollViewRef.current.scrollHeight - scrollViewRef.current.clientHeight,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, []);
 
@@ -56,9 +56,9 @@ function MessagesList() {
       }
     };
 
-    sv.addEventListener("scroll", onScroll);
+    sv.addEventListener('scroll', onScroll);
     return () => {
-      sv.removeEventListener("scroll", onScroll);
+      sv.removeEventListener('scroll', onScroll);
     };
   }, []);
 
@@ -72,17 +72,17 @@ function MessagesList() {
               message={{
                 id: `message-${i}`,
                 content: message,
-                role: "assistant",
+                role: 'assistant',
               }}
             />
           ))}
           {messages.map((message, i) => {
             const isCurrentlyStreaming =
-              status === "streaming" && i == messages.length - 1;
+              status === 'streaming' && i == messages.length - 1;
             return (
               <Fragment key={message.id}>
                 <>
-                  {message.role === "user" ? (
+                  {message.role === 'user' ? (
                     <UserMessage key={message.id} message={message} />
                   ) : (
                     <AssistantMessage
@@ -101,13 +101,13 @@ function MessagesList() {
           {tempMessage ? (
             <UserMessage
               message={{
-                id: "temp",
+                id: 'temp',
                 content: tempMessage.content,
-                role: "user",
+                role: 'user',
               }}
             />
           ) : null}
-          {status === "submitted" || tempMessage ? (
+          {status === 'submitted' || tempMessage ? (
             <>
               <div className="bg-border h-px"></div>
               <div className="flex flex-row gap-6">
@@ -124,9 +124,9 @@ function MessagesList() {
       <button
         onClick={scrollToBottom}
         className={cn(
-          "bg-background text-muted-foreground hover:text-foreground absolute bottom-4 left-1/2 z-50 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border transition-[bottom,color,opacity] duration-200 [&_svg]:size-5",
+          'bg-background text-muted-foreground hover:text-foreground absolute bottom-4 left-1/2 z-50 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border transition-[bottom,color,opacity] duration-200 [&_svg]:size-5',
           {
-            "pointer-events-none -bottom-10 opacity-0": !showScrollDownButtom,
+            'pointer-events-none -bottom-10 opacity-0': !showScrollDownButtom,
           },
         )}
       >
@@ -137,7 +137,7 @@ function MessagesList() {
 }
 
 function MessageInputBox() {
-  const { isProjectLoaded } = useSiteAssist();
+  const {isProjectLoaded} = useSiteAssist();
   const {
     handleSubmit,
     status,
@@ -166,7 +166,7 @@ function MessageInputBox() {
           value={input}
           onChange={(e) => setInput(e.currentTarget.value)}
           onKeyDown={(e) => {
-            if (e.code === "Enter" && !e.shiftKey) {
+            if (e.code === 'Enter' && !e.shiftKey) {
               e.preventDefault();
               e.currentTarget.form?.requestSubmit();
             }
@@ -184,13 +184,13 @@ function MessageInputBox() {
             !isProjectLoaded ||
             isSendingMessage ||
             isMessagesLoading ||
-            status === "submitted" ||
-            status === "streaming"
+            status === 'submitted' ||
+            status === 'streaming'
           }
         >
           {isSendingMessage ||
-          status === "streaming" ||
-          status === "submitted" ? (
+          status === 'streaming' ||
+          status === 'submitted' ? (
             <Loader2Icon className="animate-spin" />
           ) : (
             <SendIcon />
@@ -199,7 +199,7 @@ function MessageInputBox() {
       </form>
       <div>
         <p className="text-muted-foreground text-sm leading-none">
-          Powered By{" "}
+          Powered By{' '}
           <a
             href="https://siteassist.io"
             className="text-foreground font-semibold hover:underline"

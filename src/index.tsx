@@ -1,10 +1,10 @@
-import "./globals.css";
+import './globals.css';
 
-import { createRoot } from "react-dom/client";
+import {createRoot} from 'react-dom/client';
 
-import ChatButtonWidget from "./widgets/chat-button-widget";
-import type { ChatBoxWidgetProps } from "./widgets/chatbox-widget";
-import ChatBoxWidget from "./widgets/chatbox-widget";
+import ChatButtonWidget from './widgets/chat-button-widget';
+import type {ChatBoxWidgetProps} from './widgets/chatbox-widget';
+import ChatBoxWidget from './widgets/chatbox-widget';
 
 export const normalizeAttribute = (attribute: string) => {
   return attribute.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
@@ -24,7 +24,7 @@ function getPropsFromAttributes<T>(attributes: NamedNodeMap): T {
 class ChatBoxWidgetEl extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({mode: 'open'});
   }
 
   connectedCallback() {
@@ -34,12 +34,12 @@ class ChatBoxWidgetEl extends HTMLElement {
   }
 }
 
-customElements.define("sa-chatbox", ChatBoxWidgetEl);
+customElements.define('sa-chatbox', ChatBoxWidgetEl);
 
 class ChatButtonWidgetEl extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({mode: 'open'});
   }
 
   connectedCallback() {
@@ -48,4 +48,4 @@ class ChatButtonWidgetEl extends HTMLElement {
   }
 }
 
-customElements.define("sa-chat-button", ChatButtonWidgetEl);
+customElements.define('sa-chat-button', ChatButtonWidgetEl);

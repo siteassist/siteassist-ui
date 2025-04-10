@@ -1,10 +1,10 @@
-import type { Message } from "@ai-sdk/react";
-import type { Annotations } from "siteassist-core";
-import { BotIcon, Loader2Icon } from "lucide-react";
-import { useMemo } from "react";
+import type {Message} from '@ai-sdk/react';
+import {BotIcon, Loader2Icon} from 'lucide-react';
+import {useMemo} from 'react';
+import type {Annotations} from 'siteassist-core';
 
-import Avatar from "./avatar";
-import Markdown from "./markdown";
+import Avatar from './avatar';
+import Markdown from './markdown';
 
 export interface AssistantMessageProps {
   message: Message;
@@ -18,7 +18,7 @@ export default function AssistantMessage({
   const status = useMemo(() => {
     const statuses =
       (message.annotations as Annotations | null | undefined)?.filter(
-        (item) => item.type === "status"
+        (item) => item.type === 'status',
       ) ?? [];
     if (!statuses.length) {
       return null;
@@ -29,9 +29,9 @@ export default function AssistantMessage({
   const sources = useMemo(
     () =>
       (message.annotations as Annotations | null | undefined)?.find(
-        (item) => item.type === "sources"
+        (item) => item.type === 'sources',
       )?.sources ?? [],
-    [message.annotations]
+    [message.annotations],
   );
 
   return (
@@ -56,7 +56,7 @@ export default function AssistantMessage({
                 <p className="text-muted-foreground text-sm">Sources</p>
                 <div className="flex flex-wrap gap-2">
                   {sources.map((source) => {
-                    if (source.type === "link") {
+                    if (source.type === 'link') {
                       return (
                         <a
                           key={source.url}
@@ -67,7 +67,7 @@ export default function AssistantMessage({
                         >
                           <span className="truncate">
                             {source.title ??
-                              source.url.replace(/https?:\/\//, "")}
+                              source.url.replace(/https?:\/\//, '')}
                           </span>
                         </a>
                       );

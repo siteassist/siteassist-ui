@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 .siteassist-ui {
   --sa-background: #ffffff;
@@ -15,8 +15,8 @@
   --sa-ring: #18181b;
   --sa-modal-overlay: rgba(0, 0, 0, 0.35);
   --sa-radius: 0.5rem;
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "Roboto Mono", monospace;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
 
   --tw-prose-body: #374151;
   --tw-prose-headings: #111827;

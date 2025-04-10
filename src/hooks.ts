@@ -1,19 +1,19 @@
-import type { UseChatOptions } from "@ai-sdk/react";
-import { useChat } from "@ai-sdk/react";
+import type {UseChatOptions} from '@ai-sdk/react';
+import {useChat} from '@ai-sdk/react';
 
-import { useSiteAssist } from "./providers/siteassist-provider";
+import {useSiteAssist} from './providers/siteassist-provider';
 
 export type UseSiteAssistChatOptions = Omit<
   UseChatOptions,
-  | "api"
-  | "headers"
-  | "body"
-  | "id"
-  | "credentials"
-  | "fetch"
-  | "generateId"
-  | "sendExtraMessageFields"
-  | "streamProtocol"
+  | 'api'
+  | 'headers'
+  | 'body'
+  | 'id'
+  | 'credentials'
+  | 'fetch'
+  | 'generateId'
+  | 'sendExtraMessageFields'
+  | 'streamProtocol'
 > & {
   threadId: string;
   assistantId?: string;
@@ -24,13 +24,13 @@ export const useSiteAssistChat = ({
   assistantId,
   ...rest
 }: UseSiteAssistChatOptions) => {
-  const { client } = useSiteAssist();
+  const {client} = useSiteAssist();
   return useChat({
     api: `${client.apiUri}/v1/threads/${threadId}/chat`,
     body: {
       assistantId: assistantId ?? client.assistantId,
     },
-    credentials: "include",
+    credentials: 'include',
     headers: {
       Authorization: `Bearer ${client.apiKey}`,
     },

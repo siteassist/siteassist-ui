@@ -4,21 +4,21 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-} from "react";
+} from 'react';
 
 const MessageInput = forwardRef<
   HTMLTextAreaElement,
-  ComponentProps<"textarea">
->(({ className, rows = 1, value, ...props }, ref) => {
+  ComponentProps<'textarea'>
+>(({className, rows = 1, value, ...props}, ref) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   useImperativeHandle(ref, () => textAreaRef.current!);
 
   useEffect(() => {
     if (textAreaRef.current) {
-      textAreaRef.current.style.height = "0px";
+      textAreaRef.current.style.height = '0px';
       textAreaRef.current.style.height =
-        textAreaRef.current.scrollHeight + "px";
+        textAreaRef.current.scrollHeight + 'px';
     }
   }, [value]);
 
@@ -33,6 +33,6 @@ const MessageInput = forwardRef<
   );
 });
 
-MessageInput.displayName = "AutoHeightTextArea";
+MessageInput.displayName = 'AutoHeightTextArea';
 
 export default MessageInput;

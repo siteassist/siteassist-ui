@@ -1,12 +1,12 @@
-import type { Assistant, SiteAssistClient } from "siteassist-core";
-import type { ReactNode } from "react";
+import type {ReactNode} from 'react';
 import {
   createContext,
   useCallback,
   useContext,
   useEffect,
   useState,
-} from "react";
+} from 'react';
+import type {Assistant, SiteAssistClient} from 'siteassist-core';
 
 export interface SiteAssistContextValue {
   assistant: Assistant | null;
@@ -15,7 +15,7 @@ export interface SiteAssistContextValue {
 }
 
 export const SiteAssistContext = createContext<SiteAssistContextValue | null>(
-  null
+  null,
 );
 
 export interface SiteAssistProviderProps {
@@ -42,7 +42,7 @@ export function SiteAssistProvider({
   }, [loadProject]);
 
   return (
-    <SiteAssistContext.Provider value={{ assistant, isProjectLoaded, client }}>
+    <SiteAssistContext.Provider value={{assistant, isProjectLoaded, client}}>
       {children}
     </SiteAssistContext.Provider>
   );
@@ -51,7 +51,7 @@ export function SiteAssistProvider({
 export const useSiteAssist = () => {
   const context = useContext(SiteAssistContext);
   if (!context) {
-    throw new Error("useSiteAssist must use insdie SiteAssistProvider");
+    throw new Error('useSiteAssist must use insdie SiteAssistProvider');
   }
   return context;
 };
